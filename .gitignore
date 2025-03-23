@@ -1,5 +1,2 @@
-/analysis.mmd
-/api
-/go.mod
-/main.go
-/model
+/api/x_old*.go
+/model/x_old*.go

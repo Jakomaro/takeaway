@@ -96,8 +96,8 @@ sequenceDiagram
     participant DB as Database
 
     C->>API: POST /payment
-    note left of DB: INSERT INTO payment
     API->>DB: CreatePayment
+    note left of DB: INSERT INTO payment
     DB-->>API: payment
     API-->>C: payment
 
@@ -114,8 +114,8 @@ sequenceDiagram
     participant DB as Database
 
     C->>API: GET /order-status/:id
-    note left of DB: SELECT * <br>FROM order <br>WHERE id = :id
     API->>DB: SelectById
+    note left of DB: SELECT * <br>FROM order <br>WHERE id = :id
     DB-->>API: order
     API-->>C: order
 ```
