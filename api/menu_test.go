@@ -32,10 +32,20 @@ func TestGetMenu(t *testing.T) {
 			wantBody:   "[]",
 		},
 		{
-			name:       "success menu",
+			name:       "success single item",
 			tmpMenu:    []model.Item{{ItemID: 1, Name: "margherita", Price: 4.5}},
 			wantStCode: 200,
-			wantBody:   "[{\"item_id\":1,\"name\":\"margherita\",\"price\":4.5}]",
+			wantBody:   `[{"item_id":1,"name":"margherita","price":4.5}]`,
+		},
+		{
+			name: "success multi items",
+			tmpMenu: []model.Item{
+				{ItemID: 1, Name: "focaccia", Price: 5},
+				{ItemID: 2, Name: "biancaneve", Price: 6},
+				{ItemID: 3, Name: "margherita", Price: 6.5},
+			},
+			wantStCode: 200,
+			wantBody:   `[{"item_id":1,"name":"focaccia","price":5},{"item_id":2,"name":"biancaneve","price":6},{"item_id":3,"name":"margherita","price":6.5}]`,
 		},
 	}
 	for _, tt := range tests {
