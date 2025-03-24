@@ -1,0 +1,59 @@
+services:
+  # postgresql
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgres:17.2
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=takeaway
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volumes/pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - takeaway
+
+
+  #elasticsearch
+  elasticsearch:
+    container_name: es
+    hostname: elasticsearch
+    image: elasticsearch:8.17.3
+    restart: always
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200
+      - 9300:9300
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - takeaway
+
+  # kibana
+  kibana:
+    image: kibana:8.17.3
+    container_name: kib
+    hostname: kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - takeaway
+  
+
+networks:
+  takeaway:
+    driver: bridge
+
+
+  

@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/jakomaro/takeaway/services"
@@ -22,9 +23,16 @@ func (h *MenuHandler) GetMenu(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 
-	err := json.NewEncoder(w).Encode(h.menuService.GetMenu())
+	menu, err := h.menuService.GetMenu()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Println(err.Error())
+		http.Error(w, "{\"error\": \"internal server error\"}", http.StatusInternalServerError)
+		return
+	}
+	err = json.NewEncoder(w).Encode(menu)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "{\"error\": \"internal server error\"}", http.StatusInternalServerError)
 		return
 	}
 }

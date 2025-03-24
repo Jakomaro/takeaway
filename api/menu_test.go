@@ -14,8 +14,8 @@ type mockMenuService struct {
 	menu []model.Item
 }
 
-func (m *mockMenuService) GetMenu() []model.Item {
-	return m.menu
+func (m *mockMenuService) GetMenu() ([]model.Item, error) {
+	return m.menu, nil
 }
 
 func TestGetMenu(t *testing.T) {
