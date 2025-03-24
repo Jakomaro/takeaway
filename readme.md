@@ -39,7 +39,7 @@ Let's create a go rest api application production ready with logs, error handlin
 
 ## Project analysis charts
 
-## Browse the menu
+### Browse the menu
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -55,7 +55,7 @@ sequenceDiagram
 ```
 
 
-## Submit the order
+### Submit the order
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -72,7 +72,7 @@ sequenceDiagram
 
 
 
-## Get waiting time
+### Get waiting time
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -87,7 +87,7 @@ sequenceDiagram
 ```
 
 
-## Make a payment
+### Make a payment
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -105,7 +105,7 @@ sequenceDiagram
 
 
 
-## Get status order 
+### Get status order 
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -122,7 +122,7 @@ sequenceDiagram
 
 
 
-## Update menu
+### Update menu
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -136,11 +136,12 @@ sequenceDiagram
     note left of DB: UPDATE menu SET <br>name = :name,  <br>price = :price,  <br>prep_time = :prep_time <br>WHERE id = :id
     DB-->>API: menu
     API-->>A: menu
+
 ```
 
 
 
-## Get all orders
+### Get all orders
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -154,13 +155,13 @@ sequenceDiagram
     API-->>A: orders
 
     A->>API: GET /next-order
-    API->>DB: SELECT * FROM order WHERE status = 'pending' ORDER BY created_at LIMIT 1
+    API->>DB: SELECT * FROM order <br>WHERE status = 'pending' <br>ORDER BY created_at LIMIT 1
     DB-->>API: order
     API-->>A: order
 ```
 
 
-## Get next order
+### Get next order
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -174,7 +175,7 @@ sequenceDiagram
     API-->>A: order
 ```
 
-## API Logging, Error Handling and Monitoring
+### API Logging, Error Handling and Monitoring
 ```mermaid
 sequenceDiagram
     participant API as API
@@ -197,7 +198,7 @@ sequenceDiagram
 
 
 
-## Entities
+### Entities
 1. Menu
     - id
     - name
@@ -235,7 +236,7 @@ sequenceDiagram
     - amount
     - payment_method            //cash, credit card
 
-## API Endpoints
+### API Endpoints
 1. GET /menu
 2. POST /order
 3. GET /waiting-time/:id
@@ -262,3 +263,14 @@ sequenceDiagram
 6. Grafana
 7. Jaeger
 8. ELK Stack
+
+
+/takeaway-shop
+  /api           # API handlers
+  /models        # Data models (Order, FoodItem, etc.)
+  /services      # Business logic (OrderService, QueueService, etc.)
+  /repositories  # Database interactions
+  /logging       # Logging setup
+  /monitoring    # Monitoring setup
+  /tests         # Unit and integration tests
+  main.go        # Entry point
