@@ -73,11 +73,12 @@ func TestGetMenu(t *testing.T) {
 
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest(tt.method, "/menu", nil)
-			r.Header.Set("Context-Type", "application/json")
+			r.Header.Set("Content-Type", "application/json")
 
-			mh.GetMenu(w, r)
+			// Wrap the handler with middleware
+			ValidateGetMethod(http.HandlerFunc(mh.GetMenu)).ServeHTTP(w, r)
 
-			assert.Equal(t, w.Code, tt.wantStCode)
+			assert.Equal(t, tt.wantStCode, w.Code)
 			assert.JSONEq(t, tt.wantBody, strings.TrimSpace(w.Body.String()))
 		})
 	}

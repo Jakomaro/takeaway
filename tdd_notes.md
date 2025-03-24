@@ -31,7 +31,7 @@ func TestGetMenu(t *testing.T) {
 
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest("GET", "/menu", nil)
-			r.Header.Set("Context-Type", "application/json")
+			r.Header.Set("Content-Type", "application/json")
 
 			mh.GetMenu(w, r)
 
