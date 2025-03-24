@@ -21,24 +21,30 @@ func TestGetMenu(t *testing.T) {
 
 	tests := []struct {
 		name       string
+		method     string
 		tmpMenu    []model.Item
 		wantStCode int
 		wantBody   string
 	}{
 		{
 			name:       "success empty",
+			method:     "GET",
 			tmpMenu:    []model.Item{},
 			wantStCode: 200,
 			wantBody:   "[]",
 		},
 		{
-			name:       "success single item",
-			tmpMenu:    []model.Item{{ItemID: 1, Name: "margherita", Price: 4.5}},
+			name:   "success single item",
+			method: "GET",
+			tmpMenu: []model.Item{
+				{ItemID: 1, Name: "margherita", Price: 4.5},
+			},
 			wantStCode: 200,
 			wantBody:   `[{"item_id":1,"name":"margherita","price":4.5}]`,
 		},
 		{
-			name: "success multi items",
+			name:   "success multi items",
+			method: "GET",
 			tmpMenu: []model.Item{
 				{ItemID: 1, Name: "focaccia", Price: 5},
 				{ItemID: 2, Name: "biancaneve", Price: 6},
@@ -54,7 +60,7 @@ func TestGetMenu(t *testing.T) {
 			mh := NewMenuHandler(&mockMenuService{menu: tt.tmpMenu})
 
 			w := httptest.NewRecorder()
-			r := httptest.NewRequest("GET", "/menu", nil)
+			r := httptest.NewRequest(tt.method, "/menu", nil)
 			r.Header.Set("Context-Type", "application/json")
 
 			mh.GetMenu(w, r)
