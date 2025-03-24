@@ -78,8 +78,20 @@ func TestGetMenu(t *testing.T) {
 			// Wrap the handler with middleware
 			ValidateGetMethod(http.HandlerFunc(mh.GetMenu)).ServeHTTP(w, r)
 
+			// Assert the StatusCode
 			assert.Equal(t, tt.wantStCode, w.Code)
+
+			// Assert the JSON message
 			assert.JSONEq(t, tt.wantBody, strings.TrimSpace(w.Body.String()))
+
+			// Assert the allowed method in case the method is not the same
+			if tt.method != "GET" {
+				assert.Equal(t, "GET", w.Header().Get("Allow"))
+				return
+			}
+
+			// Assert the cache settings
+			assert.Equal(t, "public, max-age=3600", w.Header().Get("Cache-Control"))
 		})
 	}
 }

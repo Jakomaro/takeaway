@@ -18,6 +18,9 @@ func NewMenuHandler(menuService services.MenuServicer) *MenuHandler {
 func (h *MenuHandler) GetMenu(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "public, max-age=3600") //1 day
+
+	w.WriteHeader(http.StatusOK)
 
 	err := json.NewEncoder(w).Encode(h.menuService.GetMenu())
 	if err != nil {

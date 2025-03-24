@@ -11,7 +11,5 @@ type MenuService struct {
 }
 
 func (ms *MenuService) GetMenu() []model.Item {
-
-	return []model.Item{{ItemID: 1, Name: "margherita", Price: 4.5}}
-
+	return ms.Menu
 }
