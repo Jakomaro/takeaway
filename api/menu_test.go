@@ -1,6 +1,7 @@
 package api
 
 import (
+	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
@@ -52,6 +53,17 @@ func TestGetMenu(t *testing.T) {
 			},
 			wantStCode: 200,
 			wantBody:   `[{"item_id":1,"name":"focaccia","price":5},{"item_id":2,"name":"biancaneve","price":6},{"item_id":3,"name":"margherita","price":6.5}]`,
+		},
+		{
+			name:   "error wrong method",
+			method: "POST",
+			tmpMenu: []model.Item{
+				{ItemID: 1, Name: "focaccia", Price: 5},
+				{ItemID: 2, Name: "biancaneve", Price: 6},
+				{ItemID: 3, Name: "margherita", Price: 6.5},
+			},
+			wantStCode: http.StatusMethodNotAllowed,
+			wantBody:   `{"error":"method POST not allowed"}`,
 		},
 	}
 	for _, tt := range tests {
