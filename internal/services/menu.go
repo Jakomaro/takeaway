@@ -4,19 +4,19 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jakomaro/takeaway/model"
+	"github.com/jakomaro/takeaway/internal/model"
 	"github.com/jmoiron/sqlx"
 )
 
 type MenuServicer interface {
-	GetMenu() ([]model.Item, error)
+	GetMenu(ctx context.Context) ([]model.Item, error)
 }
 
 type MenuService struct {
 	Menu []model.Item
 }
 
-func (ms *MenuService) GetMenu() ([]model.Item, error) {
+func (ms *MenuService) GetMenu(ctx context.Context) ([]model.Item, error) {
 	return ms.Menu, nil
 }
 
@@ -25,12 +25,16 @@ type PGMenuService struct {
 	db *sqlx.DB
 }
 
-func (ms *PGMenuService) GetMenu() ([]model.Item, error) {
+func NewPGMenuService(db *sqlx.DB) *PGMenuService {
+	return &PGMenuService{db: db}
+}
+
+func (ms *PGMenuService) GetMenu(ctx context.Context) ([]model.Item, error) {
 
 	query := `SELECT * FROM menu`
 
 	var menu []model.Item
-	err := ms.db.SelectContext(context.TODO(), &menu, query)
+	err := ms.db.SelectContext(ctx, &menu, query)
 	if err != nil {
 		return nil, fmt.Errorf("error getting menu item. Error: %w", err)
 	}

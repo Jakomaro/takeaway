@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/jakomaro/takeaway/services"
+	"github.com/jakomaro/takeaway/internal/services"
 )
 
 type MenuHandler struct {
@@ -23,7 +23,7 @@ func (h *MenuHandler) GetMenu(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 
-	menu, err := h.menuService.GetMenu()
+	menu, err := h.menuService.GetMenu(r.Context())
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "{\"error\": \"internal server error\"}", http.StatusInternalServerError)

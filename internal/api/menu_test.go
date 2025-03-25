@@ -1,12 +1,13 @@
 package api
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
-	"github.com/jakomaro/takeaway/model"
+	"github.com/jakomaro/takeaway/internal/model"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,7 +15,7 @@ type mockMenuService struct {
 	menu []model.Item
 }
 
-func (m *mockMenuService) GetMenu() ([]model.Item, error) {
+func (m *mockMenuService) GetMenu(ctx context.Context) ([]model.Item, error) {
 	return m.menu, nil
 }
 
