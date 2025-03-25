@@ -29,12 +29,18 @@ func NewPGMenuService(db *sqlx.DB) *PGMenuService {
 	return &PGMenuService{db: db}
 }
 
-func (ms *PGMenuService) GetMenu(ctx context.Context) ([]model.Item, error) {
+func (ms *PGMenuService) GetMenu(ctxWithValue context.Context) ([]model.Item, error) {
 
-	query := `SELECT * FROM menu`
+	var query = `SELECT * FROM menu`
+
+	schemaAny := ctxWithValue.Value("schemaID")
+	if schemaAny != nil {
+		schema := schemaAny.(string)
+		query = fmt.Sprintf(`SELECT * FROM %v.menu`, schema)
+	}
 
 	var menu []model.Item
-	err := ms.db.SelectContext(ctx, &menu, query)
+	err := ms.db.SelectContext(ctxWithValue, &menu, query)
 	if err != nil {
 		return nil, fmt.Errorf("error getting menu item. Error: %w", err)
 	}

@@ -5,14 +5,13 @@ DROP TABLE IF EXISTS menu;
 CREATE TABLE menu (
   item_id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
-  price MONEY NOT NULL
+  price NUMERIC(10,2) NOT NULL
 );
 
 INSERT INTO menu (
   name, price
 ) 
-VALUES (
+VALUES 
   ('focaccia', 5.00),
   ('biancaneve', 5.50),
-  ('margherita', 6.5)
-)
+  ('margherita', 6.5);

@@ -9,10 +9,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=takeaway
+      - LANGUAGE=en_GB.UTF-8
     ports:
       - "5432:5432"
     volumes:
-      - ./volumes/pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
       - ./pg_init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - takeaway
@@ -51,7 +52,10 @@ services:
       - elasticsearch
     networks:
       - takeaway
-  
+
+volumes:
+  pgdata:
+
 
 networks:
   takeaway:

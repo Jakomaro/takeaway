@@ -74,6 +74,8 @@ func TestGetMenu(t *testing.T) {
 
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest(tt.method, "/menu", nil)
+			r = r.WithContext(t.Context())
+
 			r.Header.Set("Content-Type", "application/json")
 
 			// Wrap the handler with middleware
