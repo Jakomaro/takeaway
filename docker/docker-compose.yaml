@@ -13,7 +13,7 @@ services:
       - "5432:5432"
     volumes:
       - ./volumes/pgdata:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pg_init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - takeaway
 
@@ -30,6 +30,8 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+    volumes:
+      - ./es_init.sh:/docker-entrypoint-init.d/init_elasticsearch.sh
     healthcheck:
       test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
       interval: 10s

@@ -7,3 +7,12 @@ CREATE TABLE menu (
   name VARCHAR(50) NOT NULL,
   price MONEY NOT NULL
 );
+
+INSERT INTO menu (
+  name, price
+) 
+VALUES (
+  ('focaccia', 5.00),
+  ('biancaneve', 5.50),
+  ('margherita', 6.5)
+)
