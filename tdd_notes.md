@@ -26,7 +26,7 @@ func TestGetMenu(t *testing.T) {
 			wantBody:   "[]",
 		},
 	}
-	for _, tt := range tests {
+	for _, tc := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
 			w := httptest.NewRecorder()

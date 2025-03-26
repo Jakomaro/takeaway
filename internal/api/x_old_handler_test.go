@@ -43,17 +43,17 @@ package api
 // 			wantStatusCode: 400,
 // 		},
 // 	}
-// 	for _, tt := range tests {
-// 		t.Run(tt.name, func(t *testing.T) {
+// 	for _, tc := range tests {
+// 		t.Run(tc.name, func(t *testing.T) {
 
-// 			r := httptest.NewRequest("POST", "/orders", strings.NewReader(tt.args.body))
+// 			r := httptest.NewRequest("POST", "/orders", strings.NewReader(tc.args.body))
 // 			r.Header.Set("Content-Type", "application/json")
 // 			w := httptest.NewRecorder()
 
 // 			PostOrder(w, r)
 
-// 			if w.Code != tt.wantStatusCode {
-// 				t.Errorf("PostOrder() = %v, want %v", w.Code, tt.wantStatusCode)
+// 			if w.Code != tc.wantStatusCode {
+// 				t.Errorf("PostOrder() = %v, want %v", w.Code, tc.wantStatusCode)
 // 			}
 
 // 		})

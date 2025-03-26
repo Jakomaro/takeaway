@@ -67,13 +67,13 @@ func TestGetMenu(t *testing.T) {
 			wantBody:   `{"error":"method POST not allowed"}`,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
 
-			mh := NewMenuHandler(&mockMenuService{menu: tt.tmpMenu})
+			mh := NewMenuHandler(&mockMenuService{menu: tc.tmpMenu})
 
 			w := httptest.NewRecorder()
-			r := httptest.NewRequest(tt.method, "/menu", nil)
+			r := httptest.NewRequest(tc.method, "/menu", nil)
 			r = r.WithContext(t.Context())
 
 			r.Header.Set("Content-Type", "application/json")
@@ -82,13 +82,13 @@ func TestGetMenu(t *testing.T) {
 			ValidateGetMethod(http.HandlerFunc(mh.GetMenu)).ServeHTTP(w, r)
 
 			// Assert the StatusCode
-			assert.Equal(t, tt.wantStCode, w.Code)
+			assert.Equal(t, tc.wantStCode, w.Code)
 
 			// Assert the JSON message
-			assert.JSONEq(t, tt.wantBody, strings.TrimSpace(w.Body.String()))
+			assert.JSONEq(t, tc.wantBody, strings.TrimSpace(w.Body.String()))
 
 			// Assert the allowed method in case the method is not the same
-			if tt.method != "GET" {
+			if tc.method != "GET" {
 				assert.Equal(t, "GET", w.Header().Get("Allow"))
 				return
 			}

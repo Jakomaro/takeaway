@@ -22,11 +22,13 @@ func main() {
 		log.Println(err)
 	}
 
-	var servizi []services.MenuServicer
-	servizi = append(servizi, services.NewPGMenuService(postgresDB))
-	servizi = append(servizi, services.NewESMenuService(ESClient))
+	var sliceOfServices []services.MenuServicer
+	sliceOfServices = append(sliceOfServices, services.NewSMenuService())
+	sliceOfServices = append(sliceOfServices, services.NewPGMenuService(postgresDB))
+	sliceOfServices = append(sliceOfServices, services.NewESMenuService(ESClient))
 
-	for _, s := range servizi {
+	for _, s := range sliceOfServices {
+		fmt.Printf("%T\t\t: ", s)
 		menu, err := s.GetMenu(context.Background())
 		if err != nil {
 			log.Println(err)
