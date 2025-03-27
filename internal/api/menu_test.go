@@ -89,7 +89,7 @@ func TestGetMenu(t *testing.T) {
 
 			// Assert the allowed method in case the method is not the same
 			if tc.method != "GET" {
-				assert.Equal(t, "GET", w.Header().Get("Allow"))
+				assert.Equal(t, http.MethodGet, w.Header().Get("Allow"))
 				return
 			}
 

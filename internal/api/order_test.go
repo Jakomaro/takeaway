@@ -15,11 +15,13 @@ func TestOrderService(t *testing.T) {
 		name       string
 		body       string
 		wantStCode int
+		wantBody   string
 	}{
 		{
-			name:       "success",
-			body:       "",
+			name:       "valid order",
+			body:       `{"order_id": 1234, "items":[{"item_id":1, "name":"margherita", "price":8.50}],"total":17.00}`,
 			wantStCode: http.StatusCreated,
+			wantBody:   "",
 		},
 	}
 
@@ -27,10 +29,14 @@ func TestOrderService(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 
 			w := httptest.NewRecorder()
-			r := httptest.NewRequest("POST", "/order", strings.NewReader(tc.body))
-			PostOrder(w, r)
+			r := httptest.NewRequest(http.MethodPost, "/order", strings.NewReader(tc.body))
 
+			r.Header.Set("Contest-Type", "application/json")
+
+			ValidateBody(http.HandlerFunc(PostOrder)).ServeHTTP(w, r)
 			assert.Equal(t, tc.wantStCode, w.Code)
+
+			assert.Equal(t, tc.wantBody, w.Body.String())
 
 		})
 	}

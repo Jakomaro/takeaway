@@ -28,3 +28,21 @@ func ValidateGetMethod(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func ValidateBody(next http.Handler) http.Handler {
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		if r.Header.Get("Contest-Type") != "application/json" {
+			http.Error(w, "failed to validate Contest-Type", http.StatusBadRequest)
+			return
+		}
+
+		if r.Body == nil {
+			http.Error(w, "failed to validate the body", http.StatusBadRequest)
+		}
+
+		next.ServeHTTP(w, r)
+	})
+
+}
