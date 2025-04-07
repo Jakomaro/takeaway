@@ -31,7 +31,7 @@ func TestOrderService(t *testing.T) {
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest(http.MethodPost, "/order", strings.NewReader(tc.body))
 
-			r.Header.Set("Contest-Type", "application/json")
+			r.Header.Set("Content-Type", "application/json")
 
 			ValidateBody(http.HandlerFunc(PostOrder)).ServeHTTP(w, r)
 			assert.Equal(t, tc.wantStCode, w.Code)

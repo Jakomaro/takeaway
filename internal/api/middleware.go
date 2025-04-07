@@ -36,9 +36,9 @@ func ValidateBody(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		if r.Header.Get("Contest-Type") != "application/json" {
-			log.Println("Error: ValidateBody - missing Contest-Type")
-			http.Error(w, "failed to validate Contest-Type", http.StatusBadRequest)
+		if r.Header.Get("Content-Type") != "application/json" {
+			log.Println("Error: ValidateBody - missing Content-Type")
+			http.Error(w, "failed to validate Content-Type", http.StatusBadRequest)
 			return
 		}
 
