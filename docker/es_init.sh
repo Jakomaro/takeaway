@@ -42,7 +42,8 @@ curl -X POST "$ES_HOST/$INDEX_NAME/_bulk" -H 'Content-Type: application/json' -d
 #     "email": "jane.smith@example.com"
 # }'
 
-GET /menu/_search
+
+curl -X GET /menu/_search -H 'Content-Type: application/json' -d '
 {
   "from": 0, 
   "size": 100,
@@ -53,4 +54,18 @@ GET /menu/_search
       ]
     }
   }
-}
+}'
+
+
+# GET /menu/_search
+# {
+#   "from": 0, 
+#   "size": 100,
+#   "query": {
+#     "bool": {
+#       "must": [
+#         {"match_all":{}}
+#       ]
+#     }
+#   }
+# }
