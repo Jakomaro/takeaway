@@ -78,7 +78,7 @@ func TestGetMenu(t *testing.T) {
 
 			r.Header.Set("Content-Type", "application/json")
 
-			// Wrap the handler with middleware
+			// Wrap GetMenu with middleware
 			ValidateGetMethod(http.HandlerFunc(mh.GetMenu)).ServeHTTP(w, r)
 
 			// Assert the StatusCode
@@ -89,7 +89,7 @@ func TestGetMenu(t *testing.T) {
 
 			// Assert the allowed method in case the method is not the same
 			if tc.method != "GET" {
-				assert.Equal(t, "GET", w.Header().Get("Allow"))
+				assert.Equal(t, http.MethodGet, w.Header().Get("Allow"))
 				return
 			}
 

@@ -43,7 +43,8 @@ func (es *ESMenuService) GetMenu(ctx context.Context) ([]model.Item, error) {
 	}
 
 	var result map[string]any
-	if err := json.NewDecoder(res.Body).Decode(&result); err != nil {
+	err = json.NewDecoder(res.Body).Decode(&result)
+	if err != nil {
 		return nil, fmt.Errorf("failed to parse response body: %v", err)
 	}
 

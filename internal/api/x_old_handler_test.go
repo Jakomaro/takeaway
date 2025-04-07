@@ -8,7 +8,7 @@ package api
 
 // func TestPostOrder(t *testing.T) {
 
-// 	validOrder := `{"order_id": 1234, "items":[{"item_id":1, "margherita", "price":8.50, "prepTime":3, "quantity":2}],"total":17.00}`
+// 	validOrder := `{"order_id": 1234, "items":[{"item_id":1, "name":"margherita", "price":8.50, "prepTime":3, "quantity":2}],"total":17.00}`
 // 	missingItems := `{"order_id":1234, "total":17.00}`
 // 	largePayload := strings.Repeat("a", 1024*101)
 
