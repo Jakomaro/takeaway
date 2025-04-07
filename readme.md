@@ -1,4 +1,4 @@
-Let's create a go rest api application production ready with logs, error handling and monitoring using TDD. Let's say a takeaway shop wants a website for ordering food, and we want to keep track of the preparation time and the waiting queue to return a good estimate of the waiting time. The application will also allow to pay for the order. Naturally we will build this in small steps using tdd. Let's do the project analysis first.
+I want to create a go rest api application production ready with logs, error handling and monitoring using TDD. Let's say a takeaway shop wants a website for ordering food, and we want to keep track of the preparation time and the waiting queue to return a good estimate of the waiting time. The application should also allow to pay for the order. Naturally we will build this in small steps using tdd. Let's do the project analysis first.
 
 
 # Project Analysis
@@ -258,10 +258,10 @@ sequenceDiagram
 1. Go
 2. Postgres
 3. Docker
-4. Kubernetes
-5. Prometheus
-6. Grafana
-7. Jaeger
+4. Kubernetes   To learn
+5. Prometheus   To learn
+6. Grafana      To learn
+7. Jaeger       To learn
 8. ELK Stack
 
 
