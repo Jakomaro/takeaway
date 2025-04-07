@@ -32,7 +32,7 @@ func TestValidateBody_Middleware(t *testing.T) {
 			name:        "valid request",
 			contentType: "application/json",
 			body:        `{"valid":"json"}`,
-			wantStatus:  http.StatusBadRequest,
+			wantStatus:  http.StatusOK,
 		},
 	}
 	for _, tc := range tests {
