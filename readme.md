@@ -40,6 +40,7 @@ I want to create a go rest api application production ready with logs, error han
 ## Project analysis charts
 
 ### Browse the menu
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -56,6 +57,7 @@ sequenceDiagram
 
 
 ### Submit the order
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -73,6 +75,7 @@ sequenceDiagram
 
 
 ### Get waiting time
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -88,6 +91,7 @@ sequenceDiagram
 
 
 ### Make a payment
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -106,6 +110,7 @@ sequenceDiagram
 
 
 ### Get status order 
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -123,6 +128,7 @@ sequenceDiagram
 
 
 ### Update menu
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -142,6 +148,7 @@ sequenceDiagram
 
 
 ### Get all orders
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -162,6 +169,7 @@ sequenceDiagram
 
 
 ### Get next order
+
 ```mermaid
 sequenceDiagram
     participant C as Customer
@@ -176,6 +184,7 @@ sequenceDiagram
 ```
 
 ### API Logging, Error Handling and Monitoring
+
 ```mermaid
 sequenceDiagram
     participant API as API
